@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li> <a href="index.html"> Home </a> </li>
-            <li> <a href="index.html"> About </a> </li>
-            <li> <a href="index.html"> Support </a> </li>
+    <nav class="nav">
+        <ul class="navbar">
+            <li class="navbar-item"> <a class="navbar-link" href="index.html"> Home </a> </li>
+            <li class="navbar-item"> <a class="navbar-link" href="index.html"> About </a> </li>
+            <li class="navbar-item"> <a class="navbar-link" href="index.html"> Support </a> </li>
         </ul>
     </nav>
 
@@ -19,17 +20,17 @@
 
     <div class="container">
         <h4> Your Balance</h4>
-        <h1> $0.00</h1>
+        <h1 id="balance"> $0.00</h1>
 
-        <div>
+        <div class="inc-exp-container">
             <div>
                 <h4>Income</h4>
-                <p> +$0.00</p>
+                <p id="money-plus" class="money plus"> +$0.00</p>
             </div>
 
             <div>
                 <h4>Expense</h4>
-                <p> -$0.00</p>
+                <p id="money-minus" class="money minus"> -$0.00</p>
             </div>
         </div>
 
@@ -53,11 +54,10 @@
 
             <button> Add Transaction</button>
         </form>
-
-
-
-
-
     </div>
+
+    <footer>
+        <p>&copy; 2023 Expense Tracker app for Compe 561 for Fall 2023. </p>
+    </footer>
 </body>
 </html>
