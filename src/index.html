@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <nav class="nav">
         <ul class="navbar">
@@ -36,8 +38,8 @@
 
         <h3> History</h3>
         <ul id="list" class="list">
-            <li class="minus"> Cash <span> -400 </span> <button> X</button> </li>
-            <li class="plus"> Salary <span> +5000 </span> <button> X</button> </li>
+            <li class="minus"> Cash <span> -400 </span> <button class="delete-btn"> X</button> </li>
+            <li class="plus"> Salary <span> +5000 </span> <button class="delete-btn"> X</button> </li>
         </ul>
 
         <h3> Add new transaction</h3>
@@ -47,7 +49,7 @@
                 <input type="text" id="text" placeholder="Enter Text Here...">
             </div>
             <div>
-                <label for="amount"> Amount <br/>
+                <label for="amount"> Amount <br />
                     (negative -> expense, positive -> income)</label>
                 <input type="number" id="amount" placeholder="Enter amount...">
             </div>
@@ -60,4 +62,5 @@
         <p>&copy; 2023 Expense Tracker app for Compe 561 for Fall 2023. </p>
     </footer>
 </body>
+
 </html>
