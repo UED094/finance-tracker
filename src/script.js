@@ -1,18 +1,3 @@
-// first_list_item = document.querySelector("li");
-// first_list_item.style.backgroundColor = "gray";
-
-// const listItemArray = document.querySelectorAll("li");
-
-// listItemArray[0].style.backgroundColor = "purple";
-
-// listItemArray.forEach((listItem) => {
-//   if (listItem.style.backgroundColor === "purple") {
-//     listItem.style.backgroundColor = "gray";
-//   } else {
-//     listItem.style.backgroundColor = "orange";
-//   }
-// });
-
 const balance = document.getElementById("balance");
 const money_plus = document.getElementById("money-plus");
 const money_minus = document.getElementById("money-minus");
@@ -21,6 +6,9 @@ const form = document.getElementById("form");
 const text = document.getElementById("text");
 const amount = document.getElementById("amount");
 
+// Constant Strings
+const localStorageTransactionKey = "transactions"
+
 const dummyTransactions = [
   { id: 1, text: "Flower", amount: -20 },
   { id: 2, text: "Salary", amount: 300 },
@@ -28,12 +16,26 @@ const dummyTransactions = [
   { id: 4, text: "Camera", amount: 150 },
 ];
 
+const localStorageTransactions = JSON.parse(localStorage.getItem(localStorageTransactionKey))
+
+let transactions = localStorage.getItem(localStorageTransactionKey) !== null ? localStorageTransactions : [];
+
 function init() {
   list.innerHTML = "";
-  console.log(dummyTransactions);
 
-  dummyTransactions.forEach(addTransactionDOM);
+  // DEBUG LOGS
+  console.log("Dummy Transactions");
+  console.log(dummyTransactions);
+  console.log("Local Storage")
+  console.log(localStorageTransactions);
+  console.log("Actual Transactions Array")
+  console.log(transactions);
+
+  transactions.forEach(addTransactionDOM);
   updateValues();
+
+  console.log("After Update Values")
+  console.log(transactions);
 }
 
 // Add Transaction
@@ -49,13 +51,15 @@ function addTransaction(e) {
       amount: +amount.value, // ! BUG WAS HERE
     };
 
-    console.log(dummyTransactions);
+    console.log(transactions);
 
-    dummyTransactions.push(transaction);
+    transactions.push(transaction);
 
     addTransactionDOM(transaction);
 
     updateValues();
+
+    updateLocalStorage();
 
     text.value = "";
     amount.value = "";
@@ -90,7 +94,7 @@ function updateValues() {
     return acc + item;
   };
 
-  const amounts = dummyTransactions.map((transaction) => transaction.amount);
+  const amounts = transactions.map((transaction) => transaction.amount);
 
   const total = amounts.reduce(calculateTotal, 0).toFixed(2);
 
@@ -109,17 +113,15 @@ function updateValues() {
 }
 
 function removeTransaction(id) {
-  // Find the index of the transaction with the specified ID
-  const indexToRemove = dummyTransactions.findIndex(
-      (transaction) => transaction.id === id
-  );
+  transactions = transactions.filter( (transaction) => transaction.id !== id);
 
-  // Check if the transaction with the specified ID was found
-  if (indexToRemove !== -1) {
-    dummyTransactions.splice(indexToRemove, 1);
+  updateLocalStorage();
 
-    init();
-  }
+  init();
+}
+
+function updateLocalStorage() {
+  localStorage.setItem(localStorageTransactionKey, JSON.stringify(transactions));
 }
 
 init();
