@@ -3,18 +3,12 @@ const money_plus = document.getElementById("money-plus");
 const money_minus = document.getElementById("money-minus");
 const list = document.getElementById("list");
 const form = document.getElementById("form");
-const text = document.getElementById("text");
+const description = document.getElementById("description");
 const amount = document.getElementById("amount");
+const category = document.getElementById("category");
 
 // Constant Strings
 const localStorageTransactionKey = "transactions"
-
-const dummyTransactions = [
-  { id: 1, text: "Flower", amount: -20 },
-  { id: 2, text: "Salary", amount: 300 },
-  { id: 3, text: "Book", amount: -10 },
-  { id: 4, text: "Camera", amount: 150 },
-];
 
 const localStorageTransactions = JSON.parse(localStorage.getItem(localStorageTransactionKey))
 
@@ -24,8 +18,6 @@ function init() {
   list.innerHTML = "";
 
   // DEBUG LOGS
-  console.log("Dummy Transactions");
-  console.log(dummyTransactions);
   console.log("Local Storage")
   console.log(localStorageTransactions);
   console.log("Actual Transactions Array")
@@ -42,13 +34,14 @@ function init() {
 function addTransaction(e) {
   e.preventDefault();
 
-  if (text.value.trim() === "" || amount.value.trim() === "") {
+  if (description.value.trim() === "" || amount.value.trim() === "") {
     alert("Please add a text and amount");
   } else {
     const transaction = {
       id: generateID(),
-      text: text.value,
-      amount: +amount.value, // ! BUG WAS HERE
+      description: description.value,
+      amount: +amount.value,
+      category: category.value,
     };
 
     console.log(transactions);
@@ -61,7 +54,7 @@ function addTransaction(e) {
 
     updateLocalStorage();
 
-    text.value = "";
+    description.value = "";
     amount.value = "";
   }
 }
@@ -82,8 +75,12 @@ function addTransactionDOM(transaction) {
   item.classList.add(transaction.amount < 0 ? "minus" : "plus");
 
   item.innerHTML = `
-   ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span>
-   <button class="delete-btn" onclick="removeTransaction(${transaction.id})"> X</button>
+    ${transaction.category} <span> ${transaction.description}</span>
+  <span>${sign}${Math.abs(
+      transaction.amount
+  )}</span> <button class="delete-btn" onclick="removeTransaction(${
+      transaction.id
+  })">x</button>
   `;
 
   list.appendChild(item);
@@ -124,5 +121,39 @@ function updateLocalStorage() {
   localStorage.setItem(localStorageTransactionKey, JSON.stringify(transactions));
 }
 
+function openCategoryModal() {
+  const modal = document.getElementById("categoryModal");
+  modal.style.display = "block"
+}
+
+function closeCategoryModal() {
+  const modal = document.getElementById("categoryModal");
+  modal.style.display = "none"
+}
+
+
+
 init();
 form.addEventListener("submit", addTransaction);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

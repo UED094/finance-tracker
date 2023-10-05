@@ -47,9 +47,23 @@
 
         <h3> Add new transaction</h3>
         <form id="form">
-            <div>
-                <label for="text"> Text</label>
-                <input type="text" id="text" placeholder="Enter Text Here...">
+            <select id="category">
+                <option value="" selected disabled> Select Category</option>
+                <option value="new-category"> Add New Category</option>
+            </select>
+
+            <div id="categoryModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">X</span>
+                    <h2> Add New Category </h2>
+                    <input type="text" id="newCategory" placeholder="New Category">
+                    <button id="addCategory" class="btn"> Add Category</button>
+                </div>
+            </div>
+
+            <div class="form-control">
+                <label for="description"> Description </label>
+                <input type="text" id="description" placeholder="Enter Description Here...">
             </div>
             <div>
                 <label for="amount"> Amount <br />
