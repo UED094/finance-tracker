@@ -28,7 +28,6 @@ const dummyTransactions = [
   { id: 4, text: "Camera", amount: 150 },
 ];
 
-// TODO: Add dom items
 function init() {
   list.innerHTML = "";
   console.log(dummyTransactions);
@@ -47,7 +46,7 @@ function addTransaction(e) {
     const transaction = {
       id: generateID(),
       text: text.value,
-      amount: +amount.value,
+      amount: +amount.value, // ! BUG WAS HERE
     };
 
     console.log(dummyTransactions);
@@ -75,20 +74,12 @@ function addTransactionDOM(transaction) {
 
   const item = document.createElement("li");
 
-  /*
-
-  <li class="minus"> Flower <span> -20 </span> </li>
-  <li class="minus"> Check <span> -400 </span> <button class="delete-btn"> X</button> </li>
-
-  */
-
-  // TODO: Add on click for delete-btn
   // Add class based on value
   item.classList.add(transaction.amount < 0 ? "minus" : "plus");
 
   item.innerHTML = `
    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span>
-   <button class="delete-btn"> X</button>
+   <button class="delete-btn" onclick="removeTransaction(${transaction.id})"> X</button>
   `;
 
   list.appendChild(item);
@@ -115,6 +106,20 @@ function updateValues() {
   balance.innerText = `$${total}`;
   money_plus.innerText = `$${income}`;
   money_minus.innerText = `$${expense}`;
+}
+
+function removeTransaction(id) {
+  // Find the index of the transaction with the specified ID
+  const indexToRemove = dummyTransactions.findIndex(
+      (transaction) => transaction.id === id
+  );
+
+  // Check if the transaction with the specified ID was found
+  if (indexToRemove !== -1) {
+    dummyTransactions.splice(indexToRemove, 1);
+
+    init();
+  }
 }
 
 init();
