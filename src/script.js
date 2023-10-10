@@ -88,7 +88,9 @@ function createAndAppendElements(transaction, item) {
     const deleteButton = document.createElement("button");
     deleteButton.className = "delete-btn";
     deleteButton.textContent = "x";
-    deleteButton.setAttribute("data-transaction-id", transaction.id);
+    deleteButton.onclick = () => {
+        removeTransaction(transaction.id)
+    };
 
     // Append elements to the item
     item.appendChild(categorySpan);
