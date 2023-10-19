@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body class="bg-light" id="body">
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/finance_logo.png" width="30" height="24" alt="Brand image">
+                Expense Tracker
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="support.html">Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="summary.html">Summary</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <h1 class="text-center m-3"> Expense Tracker</h1>
+</header>
+
+<main>
+    <section id="balanceSection">
+        <div class="container text-center bg-white text-bg-light">
+            <h4> Your Balance</h4>
+            <h1 id="balance"> $0.00 </h1>
+        </div>
+    </section>
+
+    <section id="incomeExpenseSection">
+        <div class="container mt-4 bg-white text-bg-light py-2">
+            <div class="row inc-exp-container rounded">
+                <div class="col-6 text-center border-end">
+                    <h4>Income</h4>
+                    <p id="money-plus" class="money text-success">+$0.00</p>
+                </div>
+                <div class="col-6 text-center">
+                    <h4>Expense</h4>
+                    <p id="money-minus" class="money text-danger">-$0.00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="transactionHistorySection">
+        <div class="container mt-4 text-bg-light py-2">
+            <h3 class="text-center"> History</h3>
+
+            <ul id="list" class="list-group">
+                <!-- Your list items will go here -->
+                <li class="list-group-item d-flex justify-content-between align-items-center border-top-0  border-start-0 border-5 border-danger mb-2">
+                    Cash
+                    <span> -400 </span>
+                    <button class="btn btn-danger btn-sm delete-btn">X</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-top-0  border-start-0 border-5 border-success mb-2">
+                    Cash
+                    <span> +400 </span>
+                    <button class="btn btn-danger btn-sm delete-btn">X</button>
+                </li>
+                <!-- Add more list items as needed -->
+            </ul>
+        </div>
+    </section>
+
+    <section id="addTransactionFormSection">
+        <div class="container text-center mt-4 bg-light text-bg-light py-2">
+            <h3> Add new transaction</h3>
+
+            <form id="form">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" id="category">
+                        <option value="" selected disabled>Select Category</option>
+                        <option >+ Add New Category</option>
+                    </select>
+                </div>
+
+                <!-- Modal for adding a new category -->
+                <div id="categoryModal" class="modal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title">Add New Category</h2>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <label for="newCategory"></label>
+                                <input type="text" class="form-control" id="newCategory" placeholder="New Category">
+                                <button id="addCategory" class="btn btn-primary mt-2">Add Category</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" placeholder="Enter description...">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="amount">Amount</label>
+                    <input type="number" class="form-control" id="amount" placeholder="Enter amount...">
+                    <small class="form-text text-muted">Negative for expense, positive for income</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-md w-100 mt-4">Add Transaction</button>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center pt-1 mt-5 border-top position-static fixed-bottom">
+    <p class="col-md-4 mt-0 text-muted">© 2023 Expense Tracker</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link px-2 text-muted" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link px-2 text-muted" aria-current="page" href="about.html">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link px-2 text-muted" aria-current="page" href="support.html">Support</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link px-2 text-muted" aria-current="page" href="summary.html">Summary</a>
+        </li>
+    </ul>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
