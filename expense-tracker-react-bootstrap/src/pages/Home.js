@@ -1,10 +1,14 @@
 import React from 'react';
+import Balance from "../components/Balance";
 
-const Home = () => {
+const Home = (props) => {
+
+
+
     return (
-        <div>
-            Home
-        </div>
+        <>
+          <Balance amount={100} transaction={props.transactions}/>
+        </>
     );
 };
 
